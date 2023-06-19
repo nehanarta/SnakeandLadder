@@ -3,6 +3,7 @@ package com.bridglabz.Snakladder;
 public class SnakeAndLadder {
     static int winning_Position = 100;
     static int playerPosition = 0;
+    static int dice_count=0;
 
 
     public static void main(String[] args) {
@@ -15,14 +16,17 @@ public class SnakeAndLadder {
             System.out.println("option===>" + option);
             switch (option) {
                 case 0:
+
                     System.out.println("No play");
                     break;
                 case 1:
+                    dice_count++;
                     playerPosition = playerPosition + rollDice;
                     if(playerPosition<=winning_Position)
                     System.out.println("ladder==>" + playerPosition);
                     break;
                 case 2:
+                    dice_count++;
                     playerPosition = playerPosition - rollDice;
                     if (playerPosition < 0)
                         playerPosition = 0;
@@ -32,7 +36,7 @@ public class SnakeAndLadder {
                     System.out.println("is invalid input");
                     break;
             }
-
+            System.out.println("DiceCount===>"+dice_count);
 
         }
     }
