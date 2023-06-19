@@ -19,7 +19,7 @@ public class SnakeAndLadder {
                     break;
                 case 1:
                     playerPosition = playerPosition + rollDice;
-                    if(playerPosition<=winning_Position);
+                    if(playerPosition<=winning_Position)
                     System.out.println("ladder==>" + playerPosition);
                     break;
                 case 2:
