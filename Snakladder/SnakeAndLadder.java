@@ -1,43 +1,97 @@
 package com.bridglabz.Snakladder;
 
 public class SnakeAndLadder {
-    static int winning_Position = 100;
-    static int playerPosition = 0;
-    static int dice_count=0;
+    static final int WIN_POSITION = 100;
+    static int playerPosition1 = 0;
+    static int playerPosition2 = 0;
+    static int diceCountP1 = 0;
+    static int diceCountP2 = 0;
 
+    static void whoWon(String player, int playerPosition, int diceCount){
+        System.out.println("***********");
+        System.out.println(player + " won");
+        System.out.println("position = " + playerPosition);
+        System.out.println("dice rolled " + diceCount + " times to win");
+        System.out.println("***********");
+    }
 
     public static void main(String[] args) {
-        System.out.println("startPosition===>" + playerPosition);
-        int rollDice = (int) ((Math.random() * 10) % 6 + 1);
-        System.out.println("RollDice====>" + rollDice);
+        System.out.println("Snake and Ladder Game");
 
-        while (playerPosition < winning_Position) {
-            int option = (int) ((Math.random() * 10) % 3);
-            System.out.println("option===>" + option);
-            switch (option) {
-                case 0:
+        int playerChance = 0;
+        while(playerPosition1 < WIN_POSITION && playerPosition2 < WIN_POSITION) {
+            int option = (int)(Math.random()*10%3); // 0 or 1 or 2
+            System.out.println("Choice = " + option);
 
-                    System.out.println("No play");
-                    break;
-                case 1:
-                    dice_count++;
-                    playerPosition = playerPosition + rollDice;
-                    if(playerPosition<=winning_Position)
-                    System.out.println("ladder==>" + playerPosition);
-                    break;
-                case 2:
-                    dice_count++;
-                    playerPosition = playerPosition - rollDice;
-                    if (playerPosition < 0)
-                        playerPosition = 0;
-                    System.out.println("snake==>" + playerPosition);
-                    break;
-                default:
-                    System.out.println("is invalid input");
-                    break;
+            int diceValue = (int)(Math.random()*10%6+1);
+            System.out.println("dice value = " + diceValue);
+
+
+            if (playerChance % 2 == 0) {
+                switch (option) {
+                    case 0:
+                        System.out.println("no play");
+                        System.out.println("--------------------------");
+                        break;
+                    case 1:
+                        diceCountP1++;
+                        playerPosition1 = playerPosition1 + diceValue;
+                        //If crossing 100
+                        if(playerPosition1 > WIN_POSITION){
+                            playerPosition1 = playerPosition1 - diceValue;
+                        }
+                        System.out.println("Player 1 --> " + playerPosition1);
+                        System.out.println("--------------------------");
+                        if(playerPosition1 == WIN_POSITION)
+                            whoWon("Player 1",playerPosition1,diceCountP1);
+                        break;
+                    case 2:
+                        diceCountP1++;
+                        playerPosition1 = playerPosition1 - diceValue;
+                        //If crossing below 0
+                        if(playerPosition1 < 0){
+                            playerPosition1 = 0;
+                        }
+                        System.out.println("Player 1 --> " + playerPosition1);
+                        System.out.println("--------------------------");
+                        if(playerPosition1 == WIN_POSITION)
+                            whoWon("Player 1",playerPosition1,diceCountP1);
+                        break;
+                }
             }
-            System.out.println("DiceCount===>"+dice_count);
-
+            else{
+                switch (option) {
+                    case 0:
+                        System.out.println("no play");
+                        System.out.println("--------------------------");
+                        break;
+                    case 1:
+                        diceCountP2++;
+                        playerPosition2 = playerPosition2 + diceValue;
+                        //If crossing 100
+                        if(playerPosition2 > WIN_POSITION){
+                            playerPosition2 = playerPosition2 - diceValue;
+                        }
+                        System.out.println("Player 2 --> " + playerPosition2);
+                        System.out.println("--------------------------");
+                        if(playerPosition2 == WIN_POSITION)
+                            whoWon("Player 2",playerPosition2,diceCountP2);
+                        break;
+                    case 2:
+                        diceCountP2++;
+                        playerPosition2 = playerPosition2 - diceValue;
+                        //If crossing below 0
+                        if(playerPosition2 < 0){
+                            playerPosition2 = 0;
+                        }
+                        System.out.println("Player 2 --> " + playerPosition2);
+                        System.out.println("--------------------------");
+                        if(playerPosition2 == WIN_POSITION)
+                            whoWon("Player 2",playerPosition2,diceCountP2);
+                        break;
+                }
+            }
+            playerChance++;
         }
     }
 }
